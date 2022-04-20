@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Валидатор ввода значений
@@ -17,16 +18,23 @@ public class Validator {
 
     // Валидация ввода количества
     public static int validateQuantityInput(Scanner scanner) {
+
+        int quantity;
+        String str1 = null;
+
         while (!scanner.hasNextInt()) {
             String str = scanner.nextLine().trim();
             System.out.printf(Constants.NAN_QUANTITY_MSG, str);
         }
-        int quantity = scanner.nextInt();
+        quantity = scanner.nextInt();
         while (quantity <= 0) {
             System.out.println(Constants.INCORRECT_QUANTITY_MSG);
             while (!scanner.hasNextInt()) {
-                String str = scanner.next().trim();
-                System.out.printf(Constants.NAN_QUANTITY_MSG, str);
+                try {
+                    str1 = scanner.next().trim();
+                } catch (InputMismatchException ime) {
+                    System.out.printf(Constants.NAN_QUANTITY_MSG, str1);
+                }
             }
             quantity = scanner.nextInt();
         }
@@ -35,16 +43,23 @@ public class Validator {
 
     // Валидация ввода цены
     public static double validatePriceInput(Scanner scanner) {
+
+        double price;
+        String str1 = null;
+
         while (!scanner.hasNextDouble()) {
             String str = scanner.nextLine().trim();
             System.out.printf(Constants.NAN_PRICE_MSG, str);
         }
-        double price = scanner.nextDouble();
+        price = scanner.nextDouble();
         while (price <= 0) {
             System.out.print(Constants.INCORRECT_PRICE_MSG);
             while (!scanner.hasNextDouble()) {
-                String str = scanner.nextLine().trim();
-                System.out.printf(Constants.NAN_PRICE_MSG, str);
+                try {
+                    str1 = scanner.nextLine().trim();
+                } catch (InputMismatchException ime) {
+                    System.out.printf(Constants.NAN_PRICE_MSG, str1);
+                }
             }
             price = scanner.nextDouble();
         }

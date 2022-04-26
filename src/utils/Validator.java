@@ -19,22 +19,14 @@ public class Validator {
     // Валидация ввода количества
     public static int validateQuantityInput(Scanner scanner) {
 
-        int quantity;
+        int quantity = 0;
         String str1 = null;
 
-        while (!scanner.hasNextInt()) {
-            String str = scanner.nextLine().trim();
-            System.out.printf(Constants.NAN_QUANTITY_MSG, str);
-        }
-        quantity = scanner.nextInt();
         while (quantity <= 0) {
             System.out.println(Constants.INCORRECT_QUANTITY_MSG);
             while (!scanner.hasNextInt()) {
-                try {
-                    str1 = scanner.next().trim();
-                } catch (InputMismatchException ime) {
                     System.out.printf(Constants.NAN_QUANTITY_MSG, str1);
-                }
+                    str1 = scanner.next().trim();
             }
             quantity = scanner.nextInt();
         }
@@ -44,22 +36,14 @@ public class Validator {
     // Валидация ввода цены
     public static double validatePriceInput(Scanner scanner) {
 
-        double price;
+        double price = 0;
         String str1 = null;
 
-        while (!scanner.hasNextDouble()) {
-            String str = scanner.nextLine().trim();
-            System.out.printf(Constants.NAN_PRICE_MSG, str);
-        }
-        price = scanner.nextDouble();
         while (price <= 0) {
             System.out.print(Constants.INCORRECT_PRICE_MSG);
             while (!scanner.hasNextDouble()) {
-                try {
-                    str1 = scanner.nextLine().trim();
-                } catch (InputMismatchException ime) {
-                    System.out.printf(Constants.NAN_PRICE_MSG, str1);
-                }
+                System.out.printf(Constants.NAN_PRICE_MSG, str1);
+                str1 = scanner.nextLine().trim();
             }
             price = scanner.nextDouble();
         }

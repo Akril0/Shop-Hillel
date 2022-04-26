@@ -19,16 +19,17 @@ public class Validator {
     // Валидация ввода количества
     public static int validateQuantityInput(Scanner scanner) {
 
-        int quantity = 0;
+        int quantity;
         String str1 = null;
 
-        while (quantity <= 0) {
-            System.out.println(Constants.INCORRECT_QUANTITY_MSG);
+        while (true) {
             while (!scanner.hasNextInt()) {
-                    System.out.printf(Constants.NAN_QUANTITY_MSG, str1);
                     str1 = scanner.next().trim();
+                    System.out.printf(Constants.NAN_QUANTITY_MSG, str1);
             }
             quantity = scanner.nextInt();
+            if (quantity <= 0) System.out.println(Constants.INCORRECT_QUANTITY_MSG);
+            else break;
         }
         return quantity;
     }
@@ -36,16 +37,17 @@ public class Validator {
     // Валидация ввода цены
     public static double validatePriceInput(Scanner scanner) {
 
-        double price = 0;
+        double price;
         String str1 = null;
 
-        while (price <= 0) {
-            System.out.print(Constants.INCORRECT_PRICE_MSG);
+        while (true) {
             while (!scanner.hasNextDouble()) {
-                System.out.printf(Constants.NAN_PRICE_MSG, str1);
-                str1 = scanner.nextLine().trim();
+                    str1 = scanner.nextLine().trim();
+                    System.out.printf(Constants.NAN_PRICE_MSG, str1);
             }
             price = scanner.nextDouble();
+            if (price <= 0) System.out.print(Constants.INCORRECT_PRICE_MSG);
+            else break;
         }
         return price;
     }

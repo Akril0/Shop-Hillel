@@ -1,5 +1,6 @@
 package views;
 
+import MyExceptions.EmptyNameException;
 import MyExceptions.QuantityException;
 import models.Purchase;
 import utils.Validator;
@@ -22,7 +23,7 @@ public class PurchaseView {
     }
 
     // Ввод данных
-    public void getInputs() throws QuantityException {
+    public void getInputs() throws QuantityException, EmptyNameException {
 
         // Создаем экземпляр Scanner
         scanner = new Scanner(System.in);

@@ -1,3 +1,4 @@
+import MyExceptions.QuantityException;
 import controllers.PurchaseController;
 import models.Purchase;
 import views.PurchaseView;
@@ -5,7 +6,7 @@ import views.PurchaseView;
 // Входная точка в программу/приложение
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws QuantityException {
 
         Purchase model = new Purchase();
         PurchaseView view = new PurchaseView(model);

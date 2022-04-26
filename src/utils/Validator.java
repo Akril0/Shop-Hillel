@@ -1,5 +1,7 @@
 package utils;
 
+import MyExceptions.QuantityException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,19 +19,27 @@ public class Validator {
     }
 
     // Валидация ввода количества
-    public static int validateQuantityInput(Scanner scanner) {
+    public static int validateQuantityInput(Scanner scanner) throws QuantityException {
 
         int quantity;
         String str1 = null;
 
         while (true) {
             while (!scanner.hasNextInt()) {
+                try{
                     str1 = scanner.next().trim();
-                    System.out.printf(Constants.NAN_QUANTITY_MSG, str1);
+                    throw new QuantityException(str1);
+                }catch (QuantityException e){
+                    System.out.println(str1 + Constants.NAN_QUANTITY_MSG);
+                }
             }
             quantity = scanner.nextInt();
-            if (quantity <= 0) System.out.println(Constants.INCORRECT_QUANTITY_MSG);
-            else break;
+            if (quantity <= 0) {
+                try {
+                throw new QuantityException();
+                }catch (QuantityException e){
+                    System.out.println(Constants.INCORRECT_QUANTITY_MSG);
+                }}else break;
         }
         return quantity;
     }

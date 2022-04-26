@@ -1,6 +1,7 @@
 package controllers;
 
 import MyExceptions.EmptyNameException;
+import MyExceptions.PriceException;
 import MyExceptions.QuantityException;
 import models.Purchase;
 import utils.Rounder;
@@ -17,7 +18,7 @@ public class PurchaseController {
         this.view = view;
     }
 
-    public void runApp() throws QuantityException, EmptyNameException {
+    public void runApp() throws QuantityException, EmptyNameException, PriceException {
 
         view.getInputs();
 

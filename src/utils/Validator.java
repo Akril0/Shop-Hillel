@@ -1,6 +1,7 @@
 package utils;
 
 import MyExceptions.EmptyNameException;
+import MyExceptions.PriceException;
 import MyExceptions.QuantityException;
 
 import java.util.InputMismatchException;
@@ -36,7 +37,7 @@ public class Validator {
                     str1 = scanner.next().trim();
                     throw new QuantityException(str1);
                 }catch (QuantityException e){
-                    System.out.println(str1 + Constants.NAN_QUANTITY_MSG);
+                    System.out.print(str1 + Constants.NAN_QUANTITY_MSG);
                 }
             }
             quantity = scanner.nextInt();
@@ -44,26 +45,34 @@ public class Validator {
                 try {
                 throw new QuantityException();
                 }catch (QuantityException e){
-                    System.out.println(Constants.INCORRECT_QUANTITY_MSG);
+                    System.out.print(Constants.INCORRECT_QUANTITY_MSG);
                 }}else break;
         }
         return quantity;
     }
 
     // Валидация ввода цены
-    public static double validatePriceInput(Scanner scanner) {
+    public static double validatePriceInput(Scanner scanner) throws PriceException {
 
         double price;
         String str1 = null;
 
         while (true) {
             while (!scanner.hasNextDouble()) {
-                    str1 = scanner.nextLine().trim();
-                    System.out.printf(Constants.NAN_PRICE_MSG, str1);
+                try {
+                    str1 = scanner.next().trim();
+                    throw new PriceException(str1);
+                } catch (PriceException e) {
+                    System.out.print(str1 + Constants.NAN_PRICE_MSG);
+                }
             }
             price = scanner.nextDouble();
-            if (price <= 0) System.out.print(Constants.INCORRECT_PRICE_MSG);
-            else break;
+            if (price <= 0) {
+                try{
+                    throw new PriceException();
+                }catch (PriceException e) {
+                    System.out.print(Constants.INCORRECT_PRICE_MSG);
+            }}else break;
         }
         return price;
     }
